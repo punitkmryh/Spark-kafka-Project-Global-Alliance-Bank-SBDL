@@ -1,23 +1,30 @@
 # Spark-kafka-Project-Global-Alliance-Bank-SBDL
 The Project is SBDL – Spark bulk data load Application.project addresses the data distribution challenges faced by a multinational bank in disseminating accurate entity data from its Master Data Management (MDM) platform to downstream systems efficiently.
 
-# Project Name L Global Alliance Bank SBDL using Kafka
+# Project Name : Global Alliance Bank SBDL using Kafka
 
-# SBDL – Spark Bulk Data Load Application
+##### SBDL – Spark Bulk Data Load Application
 
 ## Introduction
 
 The SBDL (Spark Bulk Data Load) application addresses the challenges faced by a multinational bank in efficiently disseminating accurate entity data from its Master Data Management (MDM) platform to downstream systems. This capstone project proposes a Kafka-based data pipeline to ensure scalability and efficiency in synchronizing data without overloading the MDM platform.
 
+![](https://github.com/punitkmryh/Spark-kafka-Project-Global-Alliance-Bank-SBDL/blob/main/img/1.png)
 ## Project Background Overview
 
 ### Current Challenges
 
 Downstream systems necessitate a local copy of MDM entities for reporting and predictive analytics. The existing API interface is not scalable for multiple downstream systems, prompting the need for a Kafka-based solution.
 
+![](https://github.com/punitkmryh/Spark-kafka-Project-Global-Alliance-Bank-SBDL/blob/main/img/2.png)
+
+
 ### Proposed Solution
 
 The project proposes a Spark-based solution that ingests entity data from Hive tables, processes it, and publishes it to Kafka topics. This approach decouples downstream systems from direct connections to the MDM platform, ensuring scalability and ease of synchronization.
+
+![](https://github.com/punitkmryh/Spark-kafka-Project-Global-Alliance-Bank-SBDL/blob/main/img/3.png)
+
 
 ## Project Scope
 
@@ -46,6 +53,8 @@ The project proposes a Spark-based solution that ingests entity data from Hive t
 ## Data Sources
 
 The primary data source is the MDM platform, exporting entity data to Hive tables. The Spark application reads data from these Hive tables based on the specified load_date.
+
+![](https://github.com/punitkmryh/Spark-kafka-Project-Global-Alliance-Bank-SBDL/blob/main/img/4.png)
 
 ## Requirements
 
@@ -86,6 +95,8 @@ The primary data source is the MDM platform, exporting entity data to Hive table
 - Downstream systems subscribe to relevant Kafka topics.
 - Processed entity data is consumed by downstream systems.
 
+![](https://github.com/punitkmryh/Spark-kafka-Project-Global-Alliance-Bank-SBDL/blob/main/img/5.png)
+
 ## Best Practices
 
 1. **Modular Design:**
@@ -101,6 +112,9 @@ The primary data source is the MDM platform, exporting entity data to Hive table
 
 - **Entity-Specific Transformations:**
   - Detail specific transformations and processing steps for each entity, considering data cleansing, enrichment, and formatting.
+
+-
+![](https://github.com/punitkmryh/Spark-kafka-Project-Global-Alliance-Bank-SBDL/blob/main/img/account-output-sample-json.png)
 
 ## Spark Application Development
 
