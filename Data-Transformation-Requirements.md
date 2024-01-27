@@ -27,7 +27,7 @@ The primary entity for this project is the "Account" entity, consisting of data 
 
 #### JSON Structure Explanation
 
-![]()
+![](https://github.com/punitkmryh/Spark-kafka-Project-Global-Alliance-Bank-SBDL/blob/main/img/account-output-sample.png)
 
 
 1. **Event Header:**
