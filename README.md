@@ -48,6 +48,58 @@ The MDM platform exports entity data to Hive tables daily. The project utilizes 
 
 The detailed project requirements, including data structures, transformations, and business logic, are documented in the [Requirements Document](./docs/requirements.md).
 
+
+## Architecture
+
+The project leverages Apache Kafka as a central message broker to facilitate communication between the MDM system and downstream applications. Data is exported from the MDM platform to Hadoop Hive tables, and the Spark application processes and transforms the data before publishing it to Kafka topics.
+
+![Project Architecture](docs/images/architecture.png)
+
+## Requirements
+
+- Java 8 or later
+- Apache Spark
+- Apache Kafka
+- Hadoop Hive
+- ...
+
+## Data Processing Pipeline
+
+### Entity-Specific Transformations
+
+The project performs entity-specific transformations, including data cleansing, enrichment, and formatting. Each entity has its transformation logic defined in the Spark application.
+
+### Spark Application Development
+
+#### Implementation
+
+The Spark application is developed to read entity data from Hive tables, process it according to the transformation requirements, and publish the prepared data to Kafka topics.
+
+#### Testing
+
+Unit testing is implemented for the Spark application, ensuring the correctness of the transformation logic. Integration testing is also performed with the Kafka cluster to validate end-to-end functionality.
+
+## Usage
+
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/yourusername/global-alliance-bank-sbdl-kafka.git
+    cd global-alliance-bank-sbdl-kafka
+    ```
+
+2. Build the Spark application:
+
+    ```bash
+    ./build.sh
+    ```
+
+3. Run the Spark application:
+
+    ```bash
+    spark-submit --class com.example.Main --master local[2] target/global-alliance-bank-sbdl-kafka.jar
+    ```
+
 ## Data Processing and Transformation
 
 Entity-specific transformations are applied to cleanse, enrich, and format the data. The [Data Processing Requirements Document](./docs/data-processing-requirements.md) outlines the specific transformations for each entity.
