@@ -3,126 +3,146 @@ The Project is SBDL – Spark bulk data load Application.project addresses the d
 
 # Project Name L Global Alliance Bank SBDL using Kafka
 
-## Project Overview
-
-This repository contains the source code and documentation for the "Global Alliance Bank SBDL using Kafka" project. The project involves building a scalable data pipeline between the Master Data Management (MDM) platform of Global Alliance Bank and Apache Kafka for downstream systems.
-
-## Table of Contents
-
-- [Introduction](#introduction)
-- [Project Background](#project-background)
-- [Scope](#scope)
-- [Data Sources](#data-sources)
-- [Requirements](#requirements)
-- [Data Processing and Transformation](#data-processing-and-transformation)
-- [Spark Application Development](#spark-application-development)
-- [Testing](#testing)
-- [Performance Optimization](#performance-optimization)
-- [CI/CD Pipeline Setup](#cicd-pipeline-setup)
-- [Documentation](#documentation)
-- [Getting Started](#getting-started)
-- [Contributing](#contributing)
-- [License](#license)
+# SBDL – Spark Bulk Data Load Application
 
 ## Introduction
 
-Global Alliance Bank SBDL (Scalable Batch Data Loading) using Kafka is a project designed to create a robust data pipeline for synchronizing master data within the bank's enterprise. The project leverages Apache Kafka for efficient and scalable data transfer between the MDM platform and downstream systems.
+The SBDL (Spark Bulk Data Load) application addresses the challenges faced by a multinational bank in efficiently disseminating accurate entity data from its Master Data Management (MDM) platform to downstream systems. This capstone project proposes a Kafka-based data pipeline to ensure scalability and efficiency in synchronizing data without overloading the MDM platform.
 
-## Project Background
+## Project Background Overview
 
-Large multinational banks often face challenges in managing and sharing accurate entity data across various lines of business and systems. The MDM platform serves as a central data management solution, and this project focuses on optimizing data transfer from MDM to downstream systems using Kafka.
+### Current Challenges
 
-## Scope
+Downstream systems necessitate a local copy of MDM entities for reporting and predictive analytics. The existing API interface is not scalable for multiple downstream systems, prompting the need for a Kafka-based solution.
 
-The project scope includes:
-- Reading entity data from MDM stored in Hive tables.
-- Processing and transforming data according to business requirements.
-- Sending prepared entity data to Apache Kafka topics.
-- Implementation of a batch data flow pipeline with customizable synchronization frequencies.
+### Proposed Solution
+
+The project proposes a Spark-based solution that ingests entity data from Hive tables, processes it, and publishes it to Kafka topics. This approach decouples downstream systems from direct connections to the MDM platform, ensuring scalability and ease of synchronization.
+
+## Project Scope
+
+### System Components
+
+- **MDM Platform:** Central repository for entity data.
+- **Kafka Cluster:** Scalable and efficient data distribution.
+- **Hadoop Cluster with Hive and Spark:** Utilized for data processing and ingestion.
+
+### Data Flow Overview
+
+1. **Data Ingestion:**
+   - MDM exports complete entity data to Hive tables daily, maintaining a 7-day history.
+
+2. **Spark Application:**
+   - A Spark application processes entity data for a specified load_date.
+   - The application is designed for modular processing and adheres to best practices.
+
+3. **Kafka Integration:**
+   - Processed entity data is published to Kafka topics for downstream consumption.
+
+4. **Best Practices:**
+   - Modular design and code reuse principles are followed.
+   - Unit testing ensures the reliability of the Spark application.
 
 ## Data Sources
 
-The MDM platform exports entity data to Hive tables daily. The project utilizes the exported data from these tables for further processing.
+The primary data source is the MDM platform, exporting entity data to Hive tables. The Spark application reads data from these Hive tables based on the specified load_date.
 
 ## Requirements
 
-The detailed project requirements, including data structures, transformations, and business logic, are documented in the [Requirements Document](./docs/requirements.md).
+1. **Data Ingestion:**
+   - Utilize Hive tables partitioned by load_date.
+   - Ingest complete entity data for the specified load_date.
 
+2. **Spark Application:**
+   - Accept load_date as an input argument.
+   - Read and process entity data from Hive tables.
+   - Adhere to modular design and code reuse principles.
+   - Publish processed data to Kafka topics.
 
-## Architecture
+3. **Kafka Integration:**
+   - Establish a connection to the Kafka cluster.
+   - Publish processed entity data to relevant Kafka topics.
 
-The project leverages Apache Kafka as a central message broker to facilitate communication between the MDM system and downstream applications. Data is exported from the MDM platform to Hadoop Hive tables, and the Spark application processes and transforms the data before publishing it to Kafka topics.
+4. **Best Practices:**
+   - Implement modular design and code reuse.
+   - Conduct unit testing for code reliability.
 
-![Project Architecture](docs/images/architecture.png)
+## Process and Data Flow
 
-## Requirements
+### 1. Data Ingestion Process
 
-- Java 8 or later
-- Apache Spark
-- Apache Kafka
-- Hadoop Hive
-- ...
+- MDM exports complete entity data to Hive tables daily.
+- Data is partitioned by load_date.
 
-## Data Processing Pipeline
+### 2. Spark Application Process
 
-### Entity-Specific Transformations
+- Accepts load_date as an input argument.
+- Reads entity data from Hive tables for the specified load_date.
+- Applies modular processing logic.
+- Publishes processed data to Kafka topics.
 
-The project performs entity-specific transformations, including data cleansing, enrichment, and formatting. Each entity has its transformation logic defined in the Spark application.
+### 3. Kafka Data Flow
 
-### Spark Application Development
+- Downstream systems subscribe to relevant Kafka topics.
+- Processed entity data is consumed by downstream systems.
 
-#### Implementation
+## Best Practices
 
-The Spark application is developed to read entity data from Hive tables, process it according to the transformation requirements, and publish the prepared data to Kafka topics.
+1. **Modular Design:**
+   - Implement a modular structure for the Spark application, allowing easy maintenance and scalability.
 
-#### Testing
+2. **Code Reuse:**
+   - Encourage the reuse of code components to enhance efficiency and reduce redundancy.
 
-Unit testing is implemented for the Spark application, ensuring the correctness of the transformation logic. Integration testing is also performed with the Kafka cluster to validate end-to-end functionality.
+3. **Unit Testing:**
+   - Conduct thorough unit testing to ensure the reliability of the Spark application.
 
-## Usage
+## Data Processing Requirements
 
-1. Clone the repository:
-
-    ```bash
-    git clone https://github.com/yourusername/global-alliance-bank-sbdl-kafka.git
-    cd global-alliance-bank-sbdl-kafka
-    ```
-
-2. Build the Spark application:
-
-    ```bash
-    ./build.sh
-    ```
-
-3. Run the Spark application:
-
-    ```bash
-    spark-submit --class com.example.Main --master local[2] target/global-alliance-bank-sbdl-kafka.jar
-    ```
-
-## Data Processing and Transformation
-
-Entity-specific transformations are applied to cleanse, enrich, and format the data. The [Data Processing Requirements Document](./docs/data-processing-requirements.md) outlines the specific transformations for each entity.
+- **Entity-Specific Transformations:**
+  - Detail specific transformations and processing steps for each entity, considering data cleansing, enrichment, and formatting.
 
 ## Spark Application Development
 
-The Spark application is developed using PySpark. The [Spark Application Code](./src/spark_app.py) is organized and follows best practices for modular design and code reuse.
+### Implementation
 
-## Testing
+- Document the actual implementation of the Spark application, ensuring parameterized execution and adherence to best practices.
 
-The testing procedures, including unit testing and integration testing with the Kafka cluster, are documented in the [Testing Document](./docs/testing.md).
+### Testing
+
+- Outline testing procedures, including unit testing and any integration testing with the Kafka cluster.
 
 ## Performance Optimization
 
-Guidelines for estimating required resources, recommending Spark job configurations, and optimizing performance are detailed in the [Performance Optimization Document](./docs/performance-optimization.md).
+### Resource Estimation
+
+- Provide guidelines for estimating the required resources based on data analysis and workload.
+
+### Job Configuration
+
+- Recommend Spark job configurations for optimal performance.
 
 ## CI/CD Pipeline Setup
 
-The setup procedures for the CI/CD pipeline, collaboration with the DevOps team, and testing automation are outlined in the [CI/CD Pipeline Setup Document](./docs/cicd-pipeline-setup.md).
+### Setup Procedures
+
+- Detail the steps taken to set up the CI/CD pipeline, including collaboration with the DevOps team.
+
+### Testing Automation
+
+- Explain how testing procedures are automated in the CI/CD pipeline.
 
 ## Documentation
 
-Additional documentation, including user instructions, code documentation, and performance tuning recommendations, can be found in the [Documentation Folder](./docs/).
+- **User Instructions:**
+  - Provide clear instructions on how to use the Spark application, specifying input parameters and expected outputs.
+
+- **Code Documentation:**
+  - Include inline comments and documentation within the code for easy comprehension and maintenance.
+
+- **Performance Tuning Recommendations:**
+  - Offer recommendations for performance tuning based on the analysis and optimization efforts.
+
 
 ## Getting Started
 
